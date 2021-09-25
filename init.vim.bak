@@ -1,0 +1,37 @@
+" leader is spacebar
+let mapleader=" "
+
+filetype on
+syntax on
+set hidden
+set nohlsearch
+set incsearch
+set smartindent
+set expandtab
+set termguicolors
+set scrolloff=8
+set noshowmode
+set completeopt=menuone,noinsert,noselect
+set cursorline
+set autoread
+set smarttab
+set number
+
+set tabstop=2
+set shiftwidth=2
+
+set splitbelow
+set splitright
+
+set noswapfile
+set nobackup
+set nowritebackup
+
+set cmdheight=2
+set updatetime=300
+
+set colorcolumn=80
+highlight ColorColumn ctermbg=0 guibg=lightgrey
+
+colorscheme industry
+
