@@ -40,6 +40,11 @@ require('packer').startup(function()
   use 'saadparwaiz1/cmp_luasnip'
   use 'L3MON4D3/LuaSnip' -- Snippets plugin
   use 'akinsho/toggleterm.nvim' -- Using neovim terminal productively
+  use 'nathom/filetype.nvim'
+  use {
+    'phaazon/hop.nvim',
+    branch = 'v1', -- optional but strongly recommended
+  }
 end)
 
 --Remap space as leader key
@@ -107,6 +112,13 @@ vim.api.nvim_set_keymap('n',
 	 { noremap = true,
 	 silent = true })
 
+vim.api.nvim_set_keymap('t',
+  '<leader>t',
+  [[<C-/><C-Esc>]],
+	 { noremap = true,
+	 silent = true })
+
+
 -- default settings
 
 vim.cmd [[colorscheme gruvbox]]
@@ -126,6 +138,9 @@ require('lualine').setup {
     lualine_z = {'location'}
   }
 }
+
+-- override filetype.vim
+vim.g.did_load_filetypes = 1
 
 vim.wo.colorcolumn = '80'
 vim.o.hlsearch = false
@@ -256,7 +271,7 @@ for _, lsp in ipairs(servers) do
     capabilities = capabilities,
   }
 end
-require'lspconfig'.denols.setup{}
+-- require'lspconfig'.denols.setup{}
 
 -- toggle term settings
 require("toggleterm").setup{
@@ -295,4 +310,26 @@ require("toggleterm").setup{
     }
   }
 }
+
+-- hop nvim setup
+require'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
+
+-- Hop Keybindings
+-- override line find with hop
+vim.api.nvim_set_keymap('n',
+  'f',
+  "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, inclusive_jump = true })<cr>",
+  {})
+vim.api.nvim_set_keymap('n',
+  'F',
+  "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, inclusive_jump = true })<cr>",
+  {})
+vim.api.nvim_set_keymap('n',
+  't',
+  "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>",
+  {})
+vim.api.nvim_set_keymap('n',
+  'T',
+  "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>",
+  {})
 
